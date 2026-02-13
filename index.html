@@ -61,7 +61,7 @@ background:linear-gradient(135deg,#ff1f6d,#ff9ecd);
 transform:rotate(-45deg);
 border-radius:40px;
 box-shadow:0 30px 70px rgba(255,0,100,0.65);
-animation: pulse 1.5s infinite; /* Возвращаем пульсацию сердца */
+animation: pulse 1.5s infinite;
 }
 
 .heart-shape::before,
@@ -110,32 +110,38 @@ justify-content:center;
 text-align:center;
 width:100%;
 height:100%;
-/* Фикс просвечивания для iPhone */
+/* translateZ(1px) критичен для Safari, чтобы разделить слои и убрать дубли */
 transform: translateZ(1px);
 -webkit-transform: translateZ(1px);
 }
 
-/* ПЕРЕДНИЙ ТЕКСТ (Дизайн как раньше) */
+/* ПЕРЕДНИЙ ТЕКСТ (Тот самый дизайн с фото) */
 .front-text{
 font-size:32px;
 font-weight:700;
 line-height:1.3;
-background:linear-gradient(135deg,#fff7cc,#ffd6e8);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+/* Наклон как на фото */
+transform: rotate(-15deg); 
+-webkit-transform: rotate(-15deg) translateZ(10px);
+
+background: linear-gradient(135deg,#fff7cc,#ffd6e8);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+
 text-shadow:
-0 0 12px rgba(255,220,180,0.9),
-0 0 25px rgba(255,160,200,0.6);
-animation: textPulse 1.5s infinite; /* Пульсация текста */
+0 0 15px rgba(255,255,255,0.8),
+0 0 30px rgba(255,150,200,0.5);
+
+animation: textPulse 1.5s infinite;
 }
 
 @keyframes textPulse {
-0%{transform:scale(1);}
-50%{transform:scale(1.05);}
-100%{transform:scale(1);}
+0%{transform: rotate(-15deg) scale(1);}
+50%{transform: rotate(-15deg) scale(1.1);}
+100%{transform: rotate(-15deg) scale(1);}
 }
 
-/* ФОТО НА ЗАДНЕМ ФОНЕ */
+/* ФОТО */
 .back img{
 width:230px;
 height:230px;
@@ -144,7 +150,7 @@ object-fit:cover;
 margin-bottom:20px;
 border:4px solid white;
 box-shadow:0 0 30px rgba(255,255,255,0.9);
-animation: photoPulse 1.5s infinite; /* Пульсация фото */
+animation: photoPulse 1.5s infinite;
 }
 
 @keyframes photoPulse{
@@ -164,7 +170,7 @@ background:linear-gradient(135deg,#fff,#fff3c4,#ffd700);
 text-shadow:
 0 0 8px rgba(255,255,255,0.9),
 0 0 18px rgba(255,215,0,0.8);
-animation: goldPulse 1.5s infinite; /* Пульсация золотого текста */
+animation: goldPulse 1.5s infinite;
 }
 
 @keyframes goldPulse{
@@ -181,7 +187,7 @@ animation: goldPulse 1.5s infinite; /* Пульсация золотого те�
 .heart-shape::after{width:70vw;height:70vw;}
 .heart-shape::before{top:-35vw;}
 .heart-shape::after{left:35vw;}
-.front-text{font-size:24px;}
+.front-text{font-size:26px;}
 .back img{width:45vw;height:45vw;border-radius:20px;}
 .back p{font-size:18px;max-width:60vw;}
 }
@@ -198,20 +204,22 @@ animation: goldPulse 1.5s infinite; /* Пульсация золотого те�
 <div class="card-inner">
 
 <div class="face">
-<div class="heart-shape"></div>
-<div class="content front-text">
-💖<br>
-С Днём<br>
-святого Валентина
-</div>
+    <div class="heart-shape"></div>
+    <div class="content">
+        <div class="front-text">
+            💖<br>
+            С Днём<br>
+            святого Валентина
+        </div>
+    </div>
 </div>
 
 <div class="face back">
-<div class="heart-shape"></div>
-<div class="content">
-<img src="photo.jpg">
-<p>Ты — моё самое красивое счастье ❤️</p>
-</div>
+    <div class="heart-shape"></div>
+    <div class="content">
+        <img src="photo.jpg">
+        <p>Ты — моё самое красивое счастье ❤️</p>
+    </div>
 </div>
 
 </div>
